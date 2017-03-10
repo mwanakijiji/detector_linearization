@@ -1,0 +1,23 @@
+# fcn to return all values of a header card in a series of FITS files
+
+import numpy as np
+from astropy.io import fits
+
+def return_header_card_vals(stemPass, 
+                            dateStringPass, 
+                            firstFramePass,
+                            lastFramePass,
+                            headerCardString
+                           ):
+    
+    cardValArrayPass = np.zeros(lastFramePass-firstFramePass+1)
+    frameNumArrayPass = np.copy(cardValArrayPass)
+    
+    for p in range(firstFramePass,lastFramePass+1):
+        hdul = fits.open(stemPass+cam+'_'+dateStringPass+'_'+str("{:0>6d}".format(p))+'.fits')
+        cardValArrayPass[p-firstFramePass] = hdul[0].header[headerCardString]
+        frameNumArrayPass[p-firstFramePass] = p
+        
+    cardValArrayPassUnique = np.unique(cardValArrayPass) # unique card values
+    
+    return frameNumArrayPass, cardValArrayPass, cardValArrayPassUnique

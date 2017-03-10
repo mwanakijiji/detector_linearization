@@ -1,0 +1,27 @@
+# These are functions concerned with the actual polynomial fitting to pixel responses
+
+import numpy as np
+import matplotlib.pyplot as plt
+from astropy.io import fits
+
+# fit polynomial to pixel responses
+def fit_polyn_each_pix(stemDarkSubtedFlats,
+                       patternFilenamesPass,
+                       numberStartPass,
+                       numberStopPass,
+                       ySizePass,
+                       xSizePass)
+
+        # initialize a cube
+        dataCube = np.zeros((numberStopPass-numberStartPass+1,ySizePass,xSizePass))
+
+        for s in range(numberStartPass,numberStopPass+1): # loop over frames with the same DIT
+            image, header = fits.getdata(patternFilenamesPass+
+                                         str("{:0>2d}".format(frameNumsOfInterest[s].astype(int)))+
+                                         '.fits',
+                                         0,
+                                         header=True)
+            #image = np.squeeze(hdul[0].data.copy())                                   
+            dataCube[s-numberStartPass,:,:] = image # put image into cube
+
+        import ipdb; ipdb.set_trace()

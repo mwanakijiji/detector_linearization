@@ -1,0 +1,19 @@
+    '''
+    for q in range(0,10):
+         yTest = np.random.rand()*256
+            xTest = np.random.rand()*256
+
+            polyCoeffs = np.polyfit(intTimesDarksPass[2][numberStartPass:numberStopPass+1],dataCube[:,yTest,xTest],3)
+            #plotFit_y = polyCoeffs[0]*np.power(intTimesDarksPass[2][numberStartPass:numberStopPass+1],2) + \
+                #            polyCoeffs[1]*np.power(intTimesDarksPass[2][numberStartPass:numberStopPass+1],1) + \
+                #            polyCoeffs[2]
+            plotFit_y = polyCoeffs[0]*np.power(intTimesDarksPass[2][numberStartPass:numberStopPass+1],3) + \
+                    polyCoeffs[1]*np.power(intTimesDarksPass[2][numberStartPass:numberStopPass+1],2) + \
+                    polyCoeffs[2]*np.power(intTimesDarksPass[2][numberStartPass:numberStopPass+1],1) + \
+                    polyCoeffs[3]
+
+            plt.plot(intTimesDarksPass[2][numberStartPass:numberStopPass+1],dataCube[:,yTest,xTest])
+            plt.plot(intTimesDarksPass[2][numberStartPass:numberStopPass+1],plotFit_y,color='r')
+        ipdb.set_trace()
+        plt.show()
+        '''
